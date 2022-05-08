@@ -8,12 +8,12 @@ colour_map = ... % The colour map used to display results
     [255,206,173;
     0,0,0;
     64,64,64;
-    128,128,128;
     255,255,255;
+    128,128,128;
     255,0,0;
-    255,106,0;
-    255,216,0;
     181,255,22;
+    251,106,0;
+    255,216,0;
     127,0,0;
     0,127,127]  /255;
 
@@ -24,11 +24,11 @@ ZZ = 1; % Initialisation cell for binary zero
 
 Z00 = 2; % Functional cells with low value
 Z01 = 3;
-Z10 = 4;
+%Z10 = 4;
 Z11 = 5;
 
 N00 = 6; % Functional cells with high value
-N01 = 7;
+%N01 = 7;
 N10 = 8;
 N11 = 9;
 
@@ -80,14 +80,14 @@ switch read_bar(2)
          if read_bar(1) <N00
             world(row,index) = N00;
         else
-            world(row,index) = Z10;
+            world(row,index) = Z11; %Z10
         end
-    case Z10
-        if read_bar(1) <N00
-            world(row,index) = Z01;
-        else
-            world(row,index) = N11;
-        end
+%     case Z10
+%         if read_bar(1) <N00
+%             world(row,index) = Z01;
+%         else
+%             world(row,index) = N11;
+%         end
     case Z11
         if read_bar(1) <N00
             world(row,index) = Z01;
@@ -100,15 +100,15 @@ switch read_bar(2)
         else
             world(row,index) = N10;
         end
-    case N01
-        if read_bar(1) <N00
-            world(row,index) = Z00;
-        else
-            world(row,index) = N10;
-        end
+%     case N01
+%         if read_bar(1) <N00
+%             world(row,index) = Z00;
+%         else
+%             world(row,index) = N10;
+%         end
     case N10
         if read_bar(1) <N00
-            world(row,index) = N01;
+            world(row,index) = N00; %N01
         else
             world(row,index) = Z11;
         end
@@ -124,7 +124,7 @@ switch read_bar(2)
     case XX % End of number rule
         if read_bar(1) < N00
             world(row,index) = XX;
-        elseif read_bar(1) ~= XX
+        elseif N00 <= read_bar(1) && read_bar(1) <= NN
             world(row,index) = Z11;
         else
             world(row,index) = XX;
