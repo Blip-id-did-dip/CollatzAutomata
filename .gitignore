@@ -1,0 +1,6 @@
+# ignore automatic save files
+*.asv
+
+#ignore local sound files
+audio_in/
+audio_out/
