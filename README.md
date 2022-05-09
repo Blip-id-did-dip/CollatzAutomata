@@ -16,4 +16,5 @@ This example is done on the number 23, first converted into binary to be represe
 
 The cellular automata consists of 9 cells, 2 initialisation cells (ZZ, NN) , 6 functional cells (Z00,Z01,Z11,N00,N10,N11), and the end of number cell (XX).
 The following rules govern the behaviour of the cells. Each cells new state is determined by its current state and the state of the cell to the immediate left.
+
 ![Instructions.png](Instructions.png)
