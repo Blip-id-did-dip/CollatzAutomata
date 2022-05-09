@@ -6,18 +6,6 @@ number_of_steps = 30;
 
 world = ones(number_of_steps,round(number_of_steps/2));
 
-colour_map = uint8(... % The colour map used to display results
-    [255,206,173;
-    0,0,0;
-    64,64,64;
-    255,255,255;
-    128,128,128;
-    255,0,0;
-    181,255,22;
-    251,106,0;
-    255,216,0;
-    127,0,0;
-    0,127,127] );
 
 
 XX = 11; % End of number cell
@@ -138,10 +126,44 @@ end
     end
 end
 
-% The completed timeline is now shown with the colour map.
-figure(1)
-imshow(world,colour_map)
+%%
+colour_map = zeros(255,3,'uint8');
 
+colour_map(ZZ,:) = [255,206,173]; %ZZ light beige
+colour_map(Z00,:) =  [0,0,0];        %Z00 black
+colour_map(Z01,:) =  [64,64,64];      %Z01 dark grey
+%colour_map(Z10,:) = [255,255,255];    %Z10 Depreciated (was white)
+colour_map(Z11,:) =  [128,128,128];    %Z11 light grey
+colour_map(N00,:) =  [255,0,0];        %N00 Red
+%colour_map(N01,:) = [181,255,22];     %N01 Depreciated (was lime)
+colour_map(N10,:) =  [251,106,0];      %N10 Yellow
+colour_map(N11,:) =  [255,216,0];      %N11 Orange
+colour_map(NN,:) =    [127,0,0];        %NN Dark Red
+colour_map(XX,:) =  [0,127,127];        %XX blue
+
+for k = 1:60
+    colour_map(k+60,:) = round(colour_map(k,:)/2) + uint8([127,127,127]);
+end
+space_colour = 255;
+white_colour = 254;
+colour_map(white_colour,:) = [255,255,255];
+colour_map(space_colour,:) = [190,190,190];
+
+% The completed timeline is now shown with the colour map.
+
+
+display_image = zeros(size(world,1)*7 , size(world,2)*7);
+
+for col = 1:size(world,1)
+    for row = 1:size(world,2)
+        display_image((col*7-6):(col*7-1),(row*7-6):(row*7-1)) = world(col,row); %square section
+        display_image( col*7 , (row*7-6):(row*7) ) = white_colour; %horizontal divider
+        display_image( (col*7-6):(col*7-1) , row*7) = world(col,row)+60; %vertical divider
+    end
+end
+
+figure(2)
+imshow(display_image,colour_map)
 
 
 
