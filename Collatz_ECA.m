@@ -1,10 +1,12 @@
 my_num = 23; % The number to initialise the cellular automata with
 number_of_steps = 30;
+
+
+
+
 world = ones(number_of_steps,round(number_of_steps/2));
 
-
-
-colour_map = ... % The colour map used to display results
+colour_map = uint8(... % The colour map used to display results
     [255,206,173;
     0,0,0;
     64,64,64;
@@ -15,7 +17,7 @@ colour_map = ... % The colour map used to display results
     251,106,0;
     255,216,0;
     127,0,0;
-    0,127,127]  /255;
+    0,127,127] );
 
 
 XX = 11; % End of number cell
